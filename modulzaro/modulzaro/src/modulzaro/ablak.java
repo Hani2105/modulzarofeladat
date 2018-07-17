@@ -36,6 +36,7 @@ public class ablak extends javax.swing.JFrame {
 
             jComboBox1.addItem(varosok[i][0].toString());
             System.err.println("dsvdsd");
+            System.err.println("acsdcscsdcasdd");
             
             
         }
