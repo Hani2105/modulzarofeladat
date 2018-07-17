@@ -15,38 +15,29 @@ public class ablak extends javax.swing.JFrame {
 
     /**
      * Creates new form ablak
-     * 
-     * 
+     *
+     *
      */
-    
     String[][] autok;
-    String [][] varosok;
+    String[][] varosok;
+
     public ablak() throws IOException {
 
         initComponents();
         csvtomultiarray adatok = new csvtomultiarray();
         this.varosok = adatok.varosok();
         this.autok = adatok.autok();
-        
-
 
         jComboBox1.removeAllItems();
 
         for (int i = 0; i < varosok.length; i++) {
 
             jComboBox1.addItem(varosok[i][0].toString());
-            System.err.println("ezttökátírom");
-            System.err.println("acsdcscsdcasdd");
-            System.err.println("dcs");
-            System.err.println("enmegeztíromátakkomivan");
-            
-            
+
         }
-        
         int x = 0;
 
     }
-    String u;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,28 +136,27 @@ public class ablak extends javax.swing.JFrame {
 
     private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
         // TODO add your handling code here:
-         DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel();
         model = (DefaultTableModel) jTable1.getModel();
-        
+
         String valami = "";
-        try{
-        valami = jComboBox1.getSelectedItem().toString();}
-        catch(Exception e){}
-        System.out.println(valami);
-        
-        
-        for (int i = 0 ; i < this.autok.length;i++ ){
-        
-          if(valami.equals(this.autok[i][0])){
-          
-              System.out.println("mukodik!");
-          
-          }
-            
-        
+        try {
+            valami = jComboBox1.getSelectedItem().toString();
+        } catch (Exception e) {
         }
-        
-        
+        System.out.println(valami);
+
+        for (int i = 0; i < this.autok.length; i++) {
+
+            if (valami.equals(this.autok[i][0])) {
+
+                System.out.println("mukodik!");
+
+            }
+
+        }
+
+
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     /**
