@@ -42,6 +42,8 @@ public class ablak extends javax.swing.JFrame {
             
             
         }
+        
+        int x = 0;
 
     }
 
