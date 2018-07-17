@@ -38,9 +38,12 @@ public class ablak extends javax.swing.JFrame {
             System.err.println("dsvdsd");
             System.err.println("acsdcscsdcasdd");
             System.err.println("dcs");
+            System.err.println("azanyááádat");
             
             
         }
+        
+        int x = 0;
 
     }
     String u;
