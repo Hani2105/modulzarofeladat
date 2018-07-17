@@ -43,6 +43,7 @@ public class ablak extends javax.swing.JFrame {
         }
 
     }
+    String u;
 
     /**
      * This method is called from within the constructor to initialize the form.
