@@ -20,13 +20,14 @@ public class ablak extends javax.swing.JFrame {
      */
     String[][] autok;
     String[][] varosok;
+    csvtomultiarray feldolgozo = new csvtomultiarray();
 
     public ablak() throws IOException {
 
         initComponents();
         csvtomultiarray adatok = new csvtomultiarray();
-        this.varosok = adatok.varosok();
-        this.autok = adatok.autok();
+        this.varosok = feldolgozo.feldolgoz("varosok.csv") ;
+        this.autok = feldolgozo.feldolgoz("autok.csv");
 
         jComboBox1.removeAllItems();
 

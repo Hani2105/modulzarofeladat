@@ -5,7 +5,6 @@
  */
 package modulzaro;
 
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,15 +23,14 @@ public class csvtomultiarray {
     private String sor;
 
     @SuppressWarnings("empty-statement")
-    public String[][] csvtomultiarray(String filename) throws FileNotFoundException, IOException {
+
+    public String[][] feldolgoz(String filename) throws FileNotFoundException, IOException {
 
         BufferedReader br = new BufferedReader(new FileReader(filename));
 
-
         while ((sor = br.readLine()) != null) {
-          
-                sorok.add(sor.split(";"));
-            
+
+            sorok.add(sor.split(";"));
 
         }
 
@@ -40,24 +38,6 @@ public class csvtomultiarray {
         String[][] tomb = new String[sorok.size()][0];
         sorok.toArray(tomb);
         return tomb;
-
-    }
-    // városok tömb visszaadása
-
-    public String[][] varosok() throws IOException {
-
-        csvtomultiarray dolgoz = new csvtomultiarray();
-        String[][] varosok = dolgoz.csvtomultiarray("varosok.csv");
-        return varosok;
-
-    }
-//autok tömb visszaadása
-
-    public String[][] autok() throws IOException {
-
-        csvtomultiarray dolgoz = new csvtomultiarray();
-        String[][] autok = dolgoz.csvtomultiarray("autok.csv");
-        return autok;
 
     }
 

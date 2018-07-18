@@ -28,8 +28,8 @@ public class Modulzaro {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here
 
-        csvtomultiarray autok = new csvtomultiarray();
-        String[][] autolista = autok.csvtomultiarray("autok.csv");
+        csvtomultiarray feldolgoz = new csvtomultiarray();
+        String[][] autolista = feldolgoz.feldolgoz("autok.csv");
 
         ablak a = new ablak();
         a.setVisible(true);
