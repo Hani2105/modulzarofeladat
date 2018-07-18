@@ -73,11 +73,6 @@ public class ablak extends javax.swing.JFrame {
                 jComboBox1MousePressed(evt);
             }
         });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
         jComboBox1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jComboBox1KeyPressed(evt);
@@ -140,34 +135,6 @@ public class ablak extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-
-//        DefaultTableModel model = new DefaultTableModel();
-//        model = (DefaultTableModel) jTable1.getModel();
-//
-//        String valami = "";
-//        try {
-//            valami = jComboBox1.getSelectedItem().toString();
-//        } catch (Exception e) {
-//        }
-//        System.out.println(valami);
-//
-//        for (String[] autok1 : this.autok) {
-//
-//            if (valami.equals(autok1[0])) {
-//                System.out.println("mukodik!");
-//
-//                model.addRow(new Object[]{jComboBox1.getSelectedItem(), autok1[2], autok1[3], autok1[1]});
-//
-//            }
-//
-//        }
-//
-//        jTable1.setModel(model);
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox1KeyPressed
         // TODO add your handling code here:
 
@@ -182,12 +149,13 @@ public class ablak extends javax.swing.JFrame {
                 valami = jComboBox1.getSelectedItem().toString();
             } catch (Exception e) {
             }
-            System.out.println(valami);
+           
 
             for (String[] autok1 : this.autok) {
 
                 if (valami.equals(autok1[0])) {
-                    System.out.println("mukodik!");
+                    
+                    
 
                     model.addRow(new Object[]{jComboBox1.getSelectedItem(), autok1[2], autok1[3], autok1[1]});
 
@@ -215,7 +183,7 @@ public class ablak extends javax.swing.JFrame {
                 valami = jComboBox1.getSelectedItem().toString();
             } catch (Exception e) {
             }
-            System.out.println(valami);
+            
 
             for (String[] autok1 : this.autok) {
 
