@@ -29,7 +29,7 @@ public class Modulzaro {
         // TODO code application logic here
 
         csvtomultiarray feldolgoz = new csvtomultiarray();
-        String[][] autolista = feldolgoz.feldolgoz("autok.csv");
+       
 
         ablak a = new ablak();
         a.setVisible(true);

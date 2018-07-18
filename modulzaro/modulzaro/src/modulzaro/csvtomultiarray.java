@@ -24,13 +24,16 @@ public class csvtomultiarray {
 
     @SuppressWarnings("empty-statement")
 
-    public String[][] feldolgoz(String filename) throws FileNotFoundException, IOException {
+    public String[][] feldolgoz(String filename, String c) throws FileNotFoundException, IOException {
+        
+        sor = "";
+        sorok.clear();
 
         BufferedReader br = new BufferedReader(new FileReader(filename));
 
         while ((sor = br.readLine()) != null) {
 
-            sorok.add(sor.split(";"));
+            sorok.add(sor.split(c));
 
         }
 
