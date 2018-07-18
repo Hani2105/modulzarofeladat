@@ -52,6 +52,7 @@ public class ablak extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulzáró dolgozat");
@@ -109,6 +110,19 @@ public class ablak extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("1.", jPanel2);
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 964, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 580, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("2.", jPanel3);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -149,17 +163,21 @@ public class ablak extends javax.swing.JFrame {
                 valami = jComboBox1.getSelectedItem().toString();
             } catch (Exception e) {
             }
-           
 
             for (String[] autok1 : this.autok) {
 
                 if (valami.equals(autok1[0])) {
-                    
-                    
 
                     model.addRow(new Object[]{jComboBox1.getSelectedItem(), autok1[2], autok1[3], autok1[1]});
 
                 }
+
+            }
+
+            if (model.getRowCount() == 0) {
+
+                infobox info = new infobox();
+                info.infoBox("A megadott településről nincs induló autó!", "Nincs találat!");
 
             }
 
@@ -183,7 +201,6 @@ public class ablak extends javax.swing.JFrame {
                 valami = jComboBox1.getSelectedItem().toString();
             } catch (Exception e) {
             }
-            
 
             for (String[] autok1 : this.autok) {
 
@@ -192,6 +209,13 @@ public class ablak extends javax.swing.JFrame {
                     model.addRow(new Object[]{jComboBox1.getSelectedItem(), autok1[2], autok1[3], autok1[1]});
 
                 }
+
+            }
+
+            if (model.getRowCount() == 0) {
+
+                infobox info = new infobox();
+                info.infoBox("A megadott településről nincs induló autó!", "Nincs találat!");
 
             }
 
@@ -246,6 +270,7 @@ public class ablak extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
