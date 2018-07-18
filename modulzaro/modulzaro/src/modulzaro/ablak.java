@@ -25,20 +25,12 @@ public class ablak extends javax.swing.JFrame {
     public ablak() throws IOException {
 
         initComponents();
-        this.varosok = feldolgozo.feldolgoz("varosok.csv",";");
-        this.autok = feldolgozo.feldolgoz("autok.csv",";");
-
-       
+        this.varosok = feldolgozo.feldolgoz("varosok.csv", ";");
+        this.autok = feldolgozo.feldolgoz("autok.csv", ";");
 
         for (int i = 0; i < varosok.length; i++) {
 
             jComboBox1.addItem(varosok[i][0].toString());
-
-        }
-
-        for (int i = 0; i < autok.length; i++) {
-
-            jComboBox2.addItem(autok[i][0].toString());
 
         }
 
@@ -60,9 +52,9 @@ public class ablak extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Modulzáró dolgozat");
 
         jLabel1.setText("1. Egy, a felhasználó által interaktív módon meghatározott településrõl induló autók rendszám, telefonszám és érkezési település adatát képes listázni.");
 
@@ -77,8 +69,18 @@ public class ablak extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jComboBox1MouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jComboBox1MousePressed(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jComboBox1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jComboBox1KeyPressed(evt);
             }
         });
 
@@ -93,9 +95,7 @@ public class ablak extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, 0, 218, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jComboBox1, 0, 218, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -109,8 +109,6 @@ public class ablak extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -131,9 +129,7 @@ public class ablak extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 216, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,32 +137,102 @@ public class ablak extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+
+//        DefaultTableModel model = new DefaultTableModel();
+//        model = (DefaultTableModel) jTable1.getModel();
+//
+//        String valami = "";
+//        try {
+//            valami = jComboBox1.getSelectedItem().toString();
+//        } catch (Exception e) {
+//        }
+//        System.out.println(valami);
+//
+//        for (String[] autok1 : this.autok) {
+//
+//            if (valami.equals(autok1[0])) {
+//                System.out.println("mukodik!");
+//
+//                model.addRow(new Object[]{jComboBox1.getSelectedItem(), autok1[2], autok1[3], autok1[1]});
+//
+//            }
+//
+//        }
+//
+//        jTable1.setModel(model);
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox1KeyPressed
+        // TODO add your handling code here:
+
         DefaultTableModel model = new DefaultTableModel();
         model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
 
-        String valami = "";
-        try {
-            valami = jComboBox1.getSelectedItem().toString();
-        } catch (Exception e) {
-        }
-        System.out.println(valami);
+        if (evt.getKeyCode() == evt.VK_ENTER) {
 
-        for (int i = 0; i < this.autok.length; i++) {
+            String valami = "";
+            try {
+                valami = jComboBox1.getSelectedItem().toString();
+            } catch (Exception e) {
+            }
+            System.out.println(valami);
 
-            if (valami.equals(this.autok[i][0])) {
+            for (String[] autok1 : this.autok) {
 
-                System.out.println("mukodik!");
+                if (valami.equals(autok1[0])) {
+                    System.out.println("mukodik!");
+
+                    model.addRow(new Object[]{jComboBox1.getSelectedItem(), autok1[2], autok1[3], autok1[1]});
+
+                }
 
             }
 
         }
 
+        jTable1.setModel(model);
 
-    }//GEN-LAST:event_jComboBox1MouseClicked
+    }//GEN-LAST:event_jComboBox1KeyPressed
+
+    private void jComboBox1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MousePressed
+        // TODO add your handling code here:
+
+        DefaultTableModel model = new DefaultTableModel();
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+
+        if (evt.getButton() == evt.BUTTON1) {
+
+            String valami = "";
+            try {
+                valami = jComboBox1.getSelectedItem().toString();
+            } catch (Exception e) {
+            }
+            System.out.println(valami);
+
+            for (String[] autok1 : this.autok) {
+
+                if (valami.equals(autok1[0])) {
+
+                    model.addRow(new Object[]{jComboBox1.getSelectedItem(), autok1[2], autok1[3], autok1[1]});
+
+                }
+
+            }
+
+        }
+
+        jTable1.setModel(model);
+
+
+    }//GEN-LAST:event_jComboBox1MousePressed
 
     /**
      * @param args the command line arguments
@@ -209,7 +275,6 @@ public class ablak extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
