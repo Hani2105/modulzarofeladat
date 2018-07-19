@@ -17,9 +17,11 @@ public class ablak extends javax.swing.JFrame {
 
     String[][] autok;
     String[][] varosok;
+    String[][] igenyek;
     csvtomultiarray feldolgozo = new csvtomultiarray();
     String indulo = "";
     String erkezo = "";
+
     DefaultTableModel model4;
 
     public ablak() throws IOException {
@@ -94,6 +96,9 @@ public class ablak extends javax.swing.JFrame {
 
         jTable3.setModel(erkezo);
 
+        //igenyek feldolgozasa
+        igenyek = feldolgozo.feldolgoz("igenyek.csv", ";");
+
     }
 
     @SuppressWarnings("unchecked")
@@ -115,6 +120,12 @@ public class ablak extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulzáró dolgozat");
@@ -251,6 +262,70 @@ public class ablak extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("2.", jPanel3);
 
+        jLabel3.setText("3. Mindkét állomány figyelembevételével megjeleníti azokat az tételeket, - rendszám és telefonszám, valamint az igény azonosítóját láthatóvá téve, amelyek teljesíthetõk.");
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Induló állomás", "Érkező állomás", "Rendszám", "Telefonszám", "Igény azonosító"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable5);
+
+        jButton1.setText("Igények feldolgozása");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 138, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane5)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("3.", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 964, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 580, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("4.", jPanel5);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -372,6 +447,28 @@ public class ablak extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTable2MousePressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+         DefaultTableModel model5 = new DefaultTableModel();
+        model5 = (DefaultTableModel) jTable5.getModel();
+
+        for (int i = 1; i < igenyek.length; i++) {
+
+            for (int n = 0; n < autok.length; n++) {
+
+                if (igenyek[i][1].toString().equals(autok[n][0].toString()) && igenyek[i][2].toString().equals(autok[n][1].toString()) && Integer.parseInt(igenyek[i][3]) <= Integer.parseInt(autok[n][4])) {
+                    
+                  model5.addRow(new Object[]{igenyek[i][1],igenyek[i][2],autok[n][2],autok[n][3],igenyek[i][0]});
+                    
+                }
+
+            }
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     //a találatok keresése és táblába tétele
     public void eredmenytablaba(String indulo, String erkezo) {
 
@@ -446,20 +543,26 @@ public class ablak extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     // End of variables declaration//GEN-END:variables
 }
