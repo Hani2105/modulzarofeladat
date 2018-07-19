@@ -17,6 +17,9 @@ public class ablak extends javax.swing.JFrame {
     String[][] autok;
     String[][] varosok;
     csvtomultiarray feldolgozo = new csvtomultiarray();
+    String indulo = "";
+    String erkezo = "";
+    DefaultTableModel model4;
 
     public ablak() throws IOException {
 
@@ -108,6 +111,9 @@ public class ablak extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulzáró dolgozat");
@@ -181,6 +187,11 @@ public class ablak extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable2MousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
@@ -191,7 +202,24 @@ public class ablak extends javax.swing.JFrame {
                 "Cél állomás"
             }
         ));
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable3MousePressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
+
+        jLabel2.setText("2. Egy, a felhasználó által interaktív módon meghatározott településrõl, egy másik, szintén interaktív módon meghatározott településre induló autók rendszám és telefonszám adatát képes listázni.");
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Indulás", "Érkezés", "Rendszám", "Telefonszám"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable4);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -201,12 +229,23 @@ public class ablak extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 612, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jTabbedPane1.addTab("2.", jPanel3);
@@ -238,7 +277,6 @@ public class ablak extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jComboBox1KeyPressed
-        // TODO add your handling code here:
 
         DefaultTableModel model = new DefaultTableModel();
         model = (DefaultTableModel) jTable1.getModel();
@@ -314,6 +352,59 @@ public class ablak extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBox1MousePressed
 
+    private void jTable3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MousePressed
+
+        // erkezo ertek megadás
+        this.erkezo = (String) jTable3.getValueAt(jTable3.getSelectedRow(), jTable3.getSelectedColumn());
+        this.eredmenytablaba(indulo, erkezo);
+
+
+    }//GEN-LAST:event_jTable3MousePressed
+
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        // indóulo ertek megadás
+
+        this.indulo = (String) jTable2.getValueAt(jTable2.getSelectedRow(), jTable2.getSelectedColumn());
+//        this.eredmenytablaba(indulo, erkezo);
+        jTable3.clearSelection();
+
+
+    }//GEN-LAST:event_jTable2MousePressed
+
+    //a találatok keresése és táblába tétele
+    public void eredmenytablaba(String indulo, String erkezo) {
+
+        this.model4 = (DefaultTableModel) jTable4.getModel();
+        model4.setRowCount(0);
+        boolean info;
+
+        if (!this.indulo.equals("") && !this.erkezo.equals("")) {
+
+            info = false;
+            for (int i = 0; i < autok.length; i++) {
+
+                if (autok[i][0].toString().equals(indulo) && autok[i][1].toString().equals(erkezo)) {
+
+                    model4.addRow(new Object[]{indulo, erkezo, autok[i][2].toString(), autok[i][3].toString()});
+                    info = true;
+
+                }
+
+            }
+
+            if (info == false) {
+
+                infobox infobox = new infobox();
+                infobox.infoBox("A megadott feltételekkel nincs találat!", "Infó ablak!");
+
+            }
+
+        }
+
+        jTable4.setModel(model4);
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -356,15 +447,18 @@ public class ablak extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     // End of variables declaration//GEN-END:variables
 }
