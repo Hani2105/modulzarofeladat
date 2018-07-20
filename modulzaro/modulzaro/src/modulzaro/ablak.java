@@ -318,7 +318,7 @@ public class ablak extends javax.swing.JFrame {
 
         jLabel4.setText("4. Az állományokat felhasználva automatikusan alakítson ki egy \"telekocsi\" elnevezésû adatbázist, amely tábláinak szerkezeténél törekszik arra, hogy a redundancia a legkisebb mértékû legyen.");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/kapcsolat.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/kepek/sql.JPG"))); // NOI18N
         jLabel5.setText("jLabel5");
 
         jButton2.setText("Adatbázis létrehozása");
@@ -335,7 +335,7 @@ public class ablak extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 663, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -346,8 +346,8 @@ public class ablak extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
