@@ -3,6 +3,7 @@ package modulzaro;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -322,6 +323,11 @@ public class ablak extends javax.swing.JFrame {
         jLabel5.setText("jLabel5");
 
         jButton2.setText("Adatbázis létrehozása");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -347,8 +353,8 @@ public class ablak extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("4.", jPanel5);
@@ -476,7 +482,7 @@ public class ablak extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         DefaultTableModel model5 = new DefaultTableModel();
         model5 = (DefaultTableModel) jTable5.getModel();
         model5.setRowCount(0);
@@ -486,9 +492,9 @@ public class ablak extends javax.swing.JFrame {
             for (int n = 0; n < autok.length; n++) {
 
                 if (igenyek[i][1].toString().equals(autok[n][0].toString()) && igenyek[i][2].toString().equals(autok[n][1].toString()) && Integer.parseInt(igenyek[i][3]) <= Integer.parseInt(autok[n][4])) {
-                    
-                  model5.addRow(new Object[]{igenyek[i][1],igenyek[i][2],autok[n][2],autok[n][3],igenyek[i][0]});
-                    
+
+                    model5.addRow(new Object[]{igenyek[i][1], igenyek[i][2], autok[n][2], autok[n][3], igenyek[i][0]});
+
                 }
 
             }
@@ -496,6 +502,122 @@ public class ablak extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String Query = "DROP SCHEMA IF EXISTS `telekocsi` ;\n"
+                + "\n"
+                + "-- -----------------------------------------------------\n"
+                + "-- Schema telekocsi\n"
+                + "-- -----------------------------------------------------\n"
+                + "CREATE SCHEMA IF NOT EXISTS `telekocsi` DEFAULT CHARACTER SET utf8 ;\n"
+                + "USE `telekocsi` ;\n"
+                + "\n"
+                + "-- -----------------------------------------------------\n"
+                + "-- Table `telekocsi`.`varosok`\n"
+                + "-- -----------------------------------------------------\n"
+                + "DROP TABLE IF EXISTS `telekocsi`.`varosok` ;\n"
+                + "\n"
+                + "CREATE TABLE IF NOT EXISTS `telekocsi`.`varosok` (\n"
+                + "  `id_varosok` INT NOT NULL AUTO_INCREMENT,\n"
+                + "  `varosnev` VARCHAR(45) NOT NULL,\n"
+                + "  UNIQUE INDEX `varosnev_UNIQUE` (`varosnev` ASC),\n"
+                + "  PRIMARY KEY (`id_varosok`))\n"
+                + "ENGINE = InnoDB;\n"
+                + "\n"
+                + "\n"
+                + "-- -----------------------------------------------------\n"
+                + "-- Table `telekocsi`.`igenyek`\n"
+                + "-- -----------------------------------------------------\n"
+                + "DROP TABLE IF EXISTS `telekocsi`.`igenyek` ;\n"
+                + "\n"
+                + "CREATE TABLE IF NOT EXISTS `telekocsi`.`igenyek` (\n"
+                + "  `id_igenyek` INT NOT NULL AUTO_INCREMENT,\n"
+                + "  `szemelyekszama` INT NOT NULL,\n"
+                + "  `indulo_id_varosok` INT NOT NULL,\n"
+                + "  `erkezo_id_varosok1` INT NOT NULL,\n"
+                + "  PRIMARY KEY (`id_igenyek`),\n"
+                + "  INDEX `fk_igenyek_varosok_idx` (`indulo_id_varosok` ASC),\n"
+                + "  INDEX `fk_igenyek_varosok1_idx` (`erkezo_id_varosok1` ASC),\n"
+                + "  CONSTRAINT `fk_igenyek_varosok`\n"
+                + "    FOREIGN KEY (`indulo_id_varosok`)\n"
+                + "    REFERENCES `telekocsi`.`varosok` (`id_varosok`)\n"
+                + "    ON DELETE NO ACTION\n"
+                + "    ON UPDATE NO ACTION,\n"
+                + "  CONSTRAINT `fk_igenyek_varosok1`\n"
+                + "    FOREIGN KEY (`erkezo_id_varosok1`)\n"
+                + "    REFERENCES `telekocsi`.`varosok` (`id_varosok`)\n"
+                + "    ON DELETE NO ACTION\n"
+                + "    ON UPDATE NO ACTION)\n"
+                + "ENGINE = InnoDB;\n"
+                + "\n"
+                + "\n"
+                + "-- -----------------------------------------------------\n"
+                + "-- Table `telekocsi`.`autok`\n"
+                + "-- -----------------------------------------------------\n"
+                + "DROP TABLE IF EXISTS `telekocsi`.`autok` ;\n"
+                + "\n"
+                + "CREATE TABLE IF NOT EXISTS `telekocsi`.`autok` (\n"
+                + "  `id_autok` INT NOT NULL AUTO_INCREMENT,\n"
+                + "  `rendszam` VARCHAR(45) NOT NULL,\n"
+                + "  `telefonszam` VARCHAR(45) NOT NULL,\n"
+                + "  PRIMARY KEY (`id_autok`))\n"
+                + "ENGINE = InnoDB;\n"
+                + "\n"
+                + "\n"
+                + "-- -----------------------------------------------------\n"
+                + "-- Table `telekocsi`.`induloutak`\n"
+                + "-- -----------------------------------------------------\n"
+                + "DROP TABLE IF EXISTS `telekocsi`.`induloutak` ;\n"
+                + "\n"
+                + "CREATE TABLE IF NOT EXISTS `telekocsi`.`induloutak` (\n"
+                + "  `id_induloutak` INT NOT NULL AUTO_INCREMENT,\n"
+                + "  `ferohely` INT NOT NULL,\n"
+                + "  `autok_id_autok` INT NOT NULL,\n"
+                + "  `indulo_id_varosok` INT NOT NULL,\n"
+                + "  `erkezo_id_varosok1` INT NOT NULL,\n"
+                + "  PRIMARY KEY (`id_induloutak`),\n"
+                + "  INDEX `fk_induloutak_autok1_idx` (`autok_id_autok` ASC),\n"
+                + "  INDEX `fk_induloutak_varosok1_idx` (`indulo_id_varosok` ASC),\n"
+                + "  INDEX `fk_induloutak_varosok2_idx` (`erkezo_id_varosok1` ASC),\n"
+                + "  CONSTRAINT `fk_induloutak_autok1`\n"
+                + "    FOREIGN KEY (`autok_id_autok`)\n"
+                + "    REFERENCES `telekocsi`.`autok` (`id_autok`)\n"
+                + "    ON DELETE NO ACTION\n"
+                + "    ON UPDATE NO ACTION,\n"
+                + "  CONSTRAINT `fk_induloutak_varosok1`\n"
+                + "    FOREIGN KEY (`indulo_id_varosok`)\n"
+                + "    REFERENCES `telekocsi`.`varosok` (`id_varosok`)\n"
+                + "    ON DELETE NO ACTION\n"
+                + "    ON UPDATE NO ACTION,\n"
+                + "  CONSTRAINT `fk_induloutak_varosok2`\n"
+                + "    FOREIGN KEY (`erkezo_id_varosok1`)\n"
+                + "    REFERENCES `telekocsi`.`varosok` (`id_varosok`)\n"
+                + "    ON DELETE NO ACTION\n"
+                + "    ON UPDATE NO ACTION)\n"
+                + "ENGINE = InnoDB;";
+
+        //feldolgozzuk az sql utasítást külön stringekké , hogy végre tudja egyszrre hajtani a satatement
+        csvtomultiarray sql = new csvtomultiarray();
+        String[] sqluti = sql.sqlfeldolgozo(Query);
+
+        try {
+
+            sqlconn con = new sqlconn("com.mysql.jdbc.driver", "jdbc:mysql://localhost/", "root", "");
+
+            for (int i = 0; i < sqluti.length; i++) {
+
+                con.feltolt(sqluti[i]);
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ablak.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ablak.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     //a találatok keresése és táblába tétele
     public void eredmenytablaba(String indulo, String erkezo) {

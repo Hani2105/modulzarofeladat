@@ -21,11 +21,12 @@ public class csvtomultiarray {
 
     private List<String[]> sorok = new ArrayList<String[]>();
     private String sor;
+    private String[] utasitasok;
 
     @SuppressWarnings("empty-statement")
 
     public String[][] feldolgoz(String filename, String c) throws FileNotFoundException, IOException {
-        
+
         sor = "";
         sorok.clear();
 
@@ -37,10 +38,17 @@ public class csvtomultiarray {
 
         }
 
-// átkonvertáljuk a listánkat String tömbbé
         String[][] tomb = new String[sorok.size()][0];
         sorok.toArray(tomb);
         return tomb;
+
+    }
+
+    public String[] sqlfeldolgozo(String SQLutasitas) {
+
+        utasitasok = SQLutasitas.split(";");
+
+        return utasitasok;
 
     }
 
