@@ -616,6 +616,29 @@ public class ablak extends javax.swing.JFrame {
             Logger.getLogger(ablak.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        //feltöltjük a városok táblát
+        String values = "";
+        for (int i = 0; i < varosok.length; i++) {
+
+            values += "('" + varosok[i][0] + "'),";
+
+        }
+
+        values = values.substring(0, values.length() - 1);
+
+        Query = "INSERT IGNORE telekocsi.varosok (varosnev) values" + values;
+        
+        try {
+            sqlconn con = new sqlconn("com.mysql.jdbc.driver", "jdbc:mysql://localhost/", "root", "");
+            con.feltolt(Query);
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ablak.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ablak.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
